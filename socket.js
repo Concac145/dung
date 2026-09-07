@@ -11,9 +11,13 @@ const agent = new https.Agent({
 const clients = new Set()
 let ref = 0
 
-setInterval(() => {
+const sleep = async (m) => new Promise(r=>setTimeout(r,m))
+
+setInterval(async () => {
+  let i = 0
   for (const client of clients) {
     if (client.readyState === WebSocket.OPEN) {
+    c await sleep(i * 100)
       client.send(JSON.stringify({
         topic: "phoenix",
         event: "heartbeat",
@@ -84,5 +88,5 @@ const PushClient = () => {
     }
 }
 
-const MAX = 5000
+const MAX = 10_000
 for (let i = 0; i < MAX; i++) setTimeout(() => PushClient(connected), i * 100)
