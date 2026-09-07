@@ -17,7 +17,7 @@ setInterval(async () => {
   let i = 0
   for (const client of clients) {
     if (client.readyState === WebSocket.OPEN) {
-    c await sleep(i * 100)
+      await sleep(i * 100)
       client.send(JSON.stringify({
         topic: "phoenix",
         event: "heartbeat",
